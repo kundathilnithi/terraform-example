@@ -12,7 +12,7 @@ resource "aws_launch_template" "example" {
 
 
 resource "aws_autoscaling_group" "example" {
-  launch_configuration = aws_launch_template.example.name
+  launch_configuration = aws_launch_template.example
   min_size = 1
   max_size = 10
 
