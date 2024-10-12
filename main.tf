@@ -20,6 +20,7 @@ resource "aws_autoscaling_group" "example" {
   min_size = 1
   max_size = 10
   availability_zones = ["us-east-1a"]
+  vpc_zone_identifier  = data.aws_subnets.default.ids
 
   tag {
     key                 = "Name"
