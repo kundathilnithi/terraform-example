@@ -19,6 +19,7 @@ resource "aws_autoscaling_group" "example" {
   }
   min_size = 1
   max_size = 10
+  availability_zones = ["us-east-1a"]
 
   tag {
     key                 = "Name"
