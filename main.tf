@@ -4,10 +4,14 @@ provider "aws" {
 resource "aws_launch_template" "example" {
  image_id        = "ami-0866a3c8686eaeeba"
  instance_type   = "t2.micro"
- vpc_security_group_ids = [aws_security_group.instance.id]
+ vpc_security_group_ids = [aws_security_group.instance.id] 
  user_data = filebase64("${path.module}/web-install.sh")
 
  
+}
+
+data "aws_vpc" "default" {
+  default = true
 }
 
 data "aws_subnets" "default" {
@@ -24,7 +28,6 @@ resource "aws_autoscaling_group" "example" {
   }
   min_size = 1
   max_size = 10
-  availability_zones = ["us-east-1a"]
   vpc_zone_identifier  = data.aws_subnets.default.ids
 
   tag {
@@ -42,4 +45,6 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+
 }
