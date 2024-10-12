@@ -10,7 +10,12 @@ resource "aws_launch_template" "example" {
  
 }
 
-
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
 resource "aws_autoscaling_group" "example" {
   
   launch_template {
